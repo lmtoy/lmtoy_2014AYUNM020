@@ -1,29 +1,47 @@
-#! /usr/bin/env python
-#
+#! /usr/bin/env python3
+# 2014AYUNM020 - Science
+# 2015AYUNM144 - Science
 
 import os
 import sys
 
 from lmtoy import runs
 
-project="2023-S1-US-00"
+project="2014AYUNM020"
 
-#        obsnums per source (make it negative if not added to the final combination)
+# Dictionary of sources, each with a list of obsnum's in this project
+# negative obsnums are ignored in the combinations. See also comments.txt
+# for obsnum specific comments and parameters!
 on = {}
-on['foo'] = [ ]
 
+# incomplete meta data, can't run in pipeline
+on["AzTECJ100141.70+022712"] = \
+ [ 16459, 16460, 16461, 16462, 16463, 16464, 16466, 16467, \
+   16468, 16469, 16470, 16471, 16474, 16475, 16476, 16478, \
+   16479, 16480, 16552, 16553, 16554, 16555, 16556, 16557, \
+   16843, 16845, 16846, 16847, 16848, 16849, 16850, 16853, \
+   16854, 16855, 16856, 16857, 16858, 16908, 16909, 16910, \
+   16911, 16912, 16913, 16917, 16918, 16922, 16923, 16925, \
+   16926, 16927, 16928, 16929,
+ ]
 
-#        common parameters per source on the first dryrun (run1a, run2a)
+on["AzTECJ100141.70+022711.7"] = \
+ [ 31355, 31356, 31357, 31359, 31360, 31361, 31363, 31364, 31365, 31367, 31368, 31369, 31540, 31541, 31542, \
+   31544, 31545, 31546, 31548, 31549, 31550, 31552, 31553, 31554, 35599, 35600, 35601, 35603, 35604, 35605, \
+   35608, 35609, 35610, 35612, 35613, 35614, 36451, 36452, 36453, 36455, 36456, 36457, \
+   59956, 59957, 59958, 59960, 59961, 59962, 59964, 59965, 59966, 60015, 60016, 60017, \
+   60019, 60020, 60021, 60023, 60024, 60025, 60028, 60029, 60030, 60032, 60033, 60034,
+  ]
+
 pars1 = {}
-pars1['foo']   = ""
 
-#        common parameters per source on subsequent runs (run1b, run2b), e.g. bank=0 for WARES
+pars1["AzTECJ100141.70+022711.7"] = ""
+
 pars2 = {}
-pars2['foo']   = "srdp=1 admit=0"
 
-#        common parameters per source on subsequent runs (run1c, run2c), e.g. bank=1 for WARES
-pars3 = {}
-pars3['foo']   = "srdp=1 admit=0"
+pars2["AzTECJ100141.70+022711.7"] = ""
 
-if __name__ == '__main__':    
-    runs.mk_runs(project, on, pars1, pars2, pars3, sys.argv)
+
+if __name__ == "__main__":
+    runs.mk_runs(project, on, pars1, pars2, None, sys.argv)
+
